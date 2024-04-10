@@ -13,7 +13,9 @@
  * @subpackage PluginName/includes
  */
 
-namespace Vendor_Name\Plugin_Name;
+namespace MobinDev\Plugin_Name;
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
  * The core plugin class.
@@ -27,7 +29,7 @@ namespace Vendor_Name\Plugin_Name;
  * @since      1.0.0
  * @package    PluginName
  * @subpackage PluginName/includes
- * @author     Your Name <email@example.com>
+ * @author     Seyed Mobin Avazolhayat <mobin733@gmail.com>
  */
 class Plugin {
 
@@ -83,7 +85,7 @@ class Plugin {
 	private function set_locale() {
 
 		$plugin_i18n = new I18n();
-		$plugin_i18n->set_domain( $this->get_plugin_name() );
+		$plugin_i18n->set_domain( $this->get_name() );
 		$plugin_i18n->load_plugin_textdomain();
 
 	}
@@ -97,11 +99,6 @@ class Plugin {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin( $this );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -112,11 +109,6 @@ class Plugin {
 	 * @access   private
 	 */
 	private function define_frontend_hooks() {
-
-		$plugin_frontend = new Frontend( $this );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_frontend, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_frontend, 'enqueue_scripts' );
 
 	}
 
@@ -142,7 +134,7 @@ class Plugin {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_name() {
 		return $this->pluginname;
 	}
 
@@ -164,6 +156,22 @@ class Plugin {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+	protected function setUpdateChecker(){
+		$plugin_slug = $this->get_name().'/'.$this->get_name().'.php';
+		$plugin_path = trailingslashit( WP_PLUGIN_DIR ) . $plugin_slug;
+		$updateChecker = PucFactory::buildUpdateChecker(
+			'https://github.com/MobinDev/'.$this->get_name().'/',
+			'https://github.com/Tie-Solution-GmbH/'.$this->get_name().'/',
+			$plugin_path,
+			$plugin_slug
+		);
+		
+		//Set the branch that contains the stable release.
+		$updateChecker->setBranch('master');
+		
+		//Optional: If you're using a private repository, specify the access token like this:
+		$updateChecker->setAuthentication('');
 	}
 
 }

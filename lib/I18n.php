@@ -13,7 +13,7 @@
  * @subpackage PluginName/includes
  */
 
-namespace Vendor_Name\Plugin_Name;
+namespace MobinDev\Plugin_Name;
 
 /**
  * Define the internationalization functionality.
@@ -24,7 +24,7 @@ namespace Vendor_Name\Plugin_Name;
  * @since      1.0.0
  * @package    PluginName
  * @subpackage PluginName/includes
- * @author     Your Name <email@example.com>
+ * @author     Seyed Mobin Avazolhayat <mobin733@gmail.com>
  */
 class I18n {
 
