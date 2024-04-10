@@ -162,7 +162,7 @@ class Plugin {
 		$plugin_path = trailingslashit( WP_PLUGIN_DIR ) . $plugin_slug;
 		$updateChecker = PucFactory::buildUpdateChecker(
 			'https://github.com/MobinDev/'.$this->get_name().'/',
-			'https://github.com/Tie-Solution-GmbH/'.$this->get_name().'/',
+			//'https://github.com/Tie-Solution-GmbH/'.$this->get_name().'/',
 			$plugin_path,
 			$plugin_slug
 		);
