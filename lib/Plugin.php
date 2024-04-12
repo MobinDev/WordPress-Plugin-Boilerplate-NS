@@ -82,10 +82,9 @@ class Plugin {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
-
+	private function setLocale() {
 		$plugin_i18n = new I18n();
-		$plugin_i18n->set_domain( $this->get_name() );
+		$plugin_i18n->set_domain( $this->getName() );
 		$plugin_i18n->load_plugin_textdomain();
 
 	}
@@ -97,7 +96,7 @@ class Plugin {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function defineAdminHooks() {
 
 	}
 
@@ -108,7 +107,7 @@ class Plugin {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_frontend_hooks() {
+	private function defineFrontendHooks() {
 
 	}
 
@@ -121,9 +120,9 @@ class Plugin {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_frontend_hooks();
+		$this->setLocale();
+		$this->defineAdminHooks();
+		$this->defineFrontendHooks();
 		$this->loader->run();
 	}
 
@@ -134,7 +133,7 @@ class Plugin {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_name() {
+	public function getName() {
 		return $this->pluginname;
 	}
 
@@ -144,7 +143,7 @@ class Plugin {
 	 * @since     1.0.0
 	 * @return    PluginName_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function getLoader() {
 		return $this->loader;
 	}
 
@@ -154,14 +153,44 @@ class Plugin {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function getVrsion() {
 		return $this->version;
 	}
+
+	public function getDir()
+	{
+		return untrailingslashit( plugin_dir_path( dirname( __FILE__ ) ) );
+	}
+	public function getUrl()
+	{
+		return plugin_dir_url(dirname(__FILE__));
+	}
+
+	public function getAssetsDir($file = '')
+	{
+		return plugin_dir_path(dirname(__FILE__)) . "assets/$file";
+	}
+
+	public function getDistUrl($file='')
+	{
+		return $this->getUrl() . "dist/$file";
+	}
+
+	public function getDistScriptsUrl($file='')
+	{
+		return $this->getUrl() . "dist/scripts/$file";
+	}
+
+	public function getDistStylesUrl($file='')
+	{
+		return $this->getUrl() . "dist/styles/$file";
+	}
+
 	protected function setUpdateChecker(){
-		$plugin_slug = $this->get_name().'/'.$this->get_name().'.php';
+		$plugin_slug = $this->getName().'/'.$this->getName().'.php';
 		$plugin_path = trailingslashit( WP_PLUGIN_DIR ) . $plugin_slug;
 		$updateChecker = PucFactory::buildUpdateChecker(
-			'https://github.com/MobinDev/'.$this->get_name().'/',
+			'https://github.com/MobinDev/'.$this->getName().'/',
 			//'https://github.com/Tie-Solution-GmbH/'.$this->get_name().'/',
 			$plugin_path,
 			$plugin_slug
