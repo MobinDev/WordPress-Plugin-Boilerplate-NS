@@ -101,6 +101,17 @@ class Plugin {
 	}
 
 	/**
+	 * Register all of the hooks related to the common-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function defineCommonHooks() {
+
+	}
+
+	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
@@ -122,6 +133,7 @@ class Plugin {
 	public function run() {
 		$this->setLocale();
 		$this->defineAdminHooks();
+		$this->defineCommonHooks();
 		$this->defineFrontendHooks();
 		$this->loader->run();
 	}
