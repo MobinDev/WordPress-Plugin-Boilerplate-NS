@@ -165,7 +165,7 @@ class Plugin {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function getVrsion() {
+	public function getVersion() {
 		return $this->version;
 	}
 
