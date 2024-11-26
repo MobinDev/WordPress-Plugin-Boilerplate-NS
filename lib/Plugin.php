@@ -83,10 +83,7 @@ class Plugin {
 	 * @access   private
 	 */
 	private function setLocale() {
-		$plugin_i18n = new I18n();
-		$plugin_i18n->set_domain( $this->getName() );
-		$plugin_i18n->load_plugin_textdomain();
-
+		new I18n($this);
 	}
 
 	/**
